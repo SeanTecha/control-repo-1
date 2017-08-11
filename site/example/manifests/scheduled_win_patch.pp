@@ -6,7 +6,7 @@ class example::scheduled_win_patch (
   String  $wsus_serverip          = '10.32.175.225',
 ) {
 
-  host { "${wsus_servername}":
+  host { "${wsus_server}":
     ip   => $wsus_serverip,
   }
 
