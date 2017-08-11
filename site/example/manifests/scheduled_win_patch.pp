@@ -34,6 +34,7 @@ class example::scheduled_win_patch (
     # target_group                        => 'ServerUpdates',
     purge_values                        => true,
     before                              => Exec['Install Windows Updates'],
+    require                             => Host['Register WSUS server'],
   }
 
   # Bootstraps chocolatey
