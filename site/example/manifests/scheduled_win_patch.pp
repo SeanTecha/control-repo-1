@@ -6,8 +6,7 @@ class example::scheduled_win_patch (
   String  $wsus_serverip          = '10.32.175.225',
 ) {
 
-  host { 'Register WSUS server':
-    name => $wsus_server,
+  host { "${$wsus_server}":
     ip   => $wsus_serverip,
   }
 
@@ -34,7 +33,7 @@ class example::scheduled_win_patch (
     # target_group                        => 'ServerUpdates',
     purge_values                        => true,
     before                              => Exec['Install Windows Updates'],
-    require                             => Host['Register WSUS server'],
+    require                             => Host["${$wsus_server}"],
   }
 
   # Bootstraps chocolatey
