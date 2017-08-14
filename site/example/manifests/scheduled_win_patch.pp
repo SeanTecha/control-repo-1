@@ -2,12 +2,12 @@ class example::scheduled_win_patch (
   String  $maintenance_day        = 'Saturday',
   String  $maintenance_start_time = '1:30',
   String  $maintenance_end_time   = '4:30',
-  String  $wsus_server            = 'http://wsus-server',
-  String  $wsus_serverport        = '8530',
+  String  $wsus_server            = 'http://wsus-server:8530',
+  String  $wsus_servername        = 'wsus-server',
   String  $wsus_serverip          = '10.32.175.225',
 ) {
 
-  host { "${wsus_server}":
+  host { "${wsus_servername}":
     ip   => $wsus_serverip,
   }
 
@@ -30,11 +30,11 @@ class example::scheduled_win_patch (
     auto_update_option                  => 'NotifyOnly',
     detection_frequency_hours           => 1,
     no_auto_reboot_with_logged_on_users => false,
-    server_url                          => "${wsus_server}:${wsus_serverport}",
+    server_url                          => $wsus_server,
     # target_group                        => 'ServerUpdates',
     purge_values                        => true,
     before                              => Exec['Install Windows Updates'],
-    require                             => Host["${wsus_server}"],
+    require                             => Host["${wsus_servername}"],
   }
 
   # Bootstraps chocolatey
