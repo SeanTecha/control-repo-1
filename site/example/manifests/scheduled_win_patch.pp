@@ -1,7 +1,7 @@
 class example::scheduled_win_patch (
   String  $maintenance_day        = 'Monday',
-  String  $maintenance_start_time = '14:30',
-  String  $maintenance_end_time   = '17:30',
+  String  $maintenance_start_time = '22:00',
+  String  $maintenance_end_time   = '1:00',
   String  $wsus_server            = 'http://wsus-server:8530',
   String  $wsus_servername        = 'wsus-server',
   String  $wsus_serverip          = '10.32.175.225',
